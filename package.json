@@ -1,0 +1,24 @@
+{
+  "name": "fastify-prisma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:girordo/fastify-prisma.git",
+  "author": "girordo <tsgiroldo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.13.0",
+    "fastify": "^3.29.0",
+    "fastify-jwt": "^4.2.0",
+    "fastify-zod": "^1.0.0-rc10",
+    "zod": "^3.14.4",
+    "zod-to-json-schema": "^3.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.4"
+  }
+}
