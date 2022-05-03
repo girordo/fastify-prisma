@@ -3,7 +3,13 @@ import fjwt from "@fastify/jwt";
 import userRoutes from "./modules/user/user.route";
 import { userSchemas } from "./modules/user/user.schema";
 
-const server = Fastify();
+export const server = Fastify();
+
+declare module "fastify" {
+  export interface FastifyInstance {
+    authenticate: any;
+  }
+}
 
 server.register(fjwt, { secret: "asdfhjshahaskda" });
 
@@ -11,7 +17,7 @@ server.decorate(
   "authenticate",
   async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      await server.jwtVerify();
+      await request.jwtVerify();
     } catch (e) {
       return reply.send(e);
     }

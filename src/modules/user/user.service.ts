@@ -10,4 +10,24 @@ export async function createUser(input: CreateUserInput) {
   const user = await prisma.user.create({
     data: { ...rest, password: hash, salt },
   });
+
+  return user;
+}
+
+export async function findUserByEmail(email: string) {
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  return user;
+}
+
+export async function findUsers() {
+  return prisma.user.findMany({
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
 }
