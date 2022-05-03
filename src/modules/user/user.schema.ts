@@ -7,9 +7,7 @@ const userCore = {
       required_error: "Email is required",
       invalid_type_error: "Email must be a string",
     })
-    .email()
-    .max(255)
-    .min(3),
+    .email(),
   name: z.string(),
 };
 
@@ -22,6 +20,7 @@ const createUserSchema = z.object({
 });
 
 const createUserResponseSchema = z.object({
+  id: z.number(),
   ...userCore,
 });
 
@@ -40,6 +39,7 @@ const loginResponseSchema = z.object({
 });
 
 export type CreateUserInput = z.infer<typeof createUserSchema>;
+
 export type LoginInput = z.infer<typeof loginSchema>;
 
 export const { schemas: userSchemas, $ref } = buildJsonSchemas({
