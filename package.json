@@ -9,9 +9,9 @@
     "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
   },
   "dependencies": {
+    "@fastify/jwt": "^5.0.1",
     "@prisma/client": "^3.13.0",
     "fastify": "^3.29.0",
-    "fastify-jwt": "^4.2.0",
     "fastify-zod": "^1.0.0-rc10",
     "zod": "^3.14.4",
     "zod-to-json-schema": "^3.14.0"
