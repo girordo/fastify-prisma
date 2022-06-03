@@ -6,7 +6,9 @@
   "author": "girordo <tsgiroldo@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts"
+    "dev": "tsnd --respawn --transpile-only --exit-child src/app.ts",
+    "lint": "eslint --ext .ts src",
+    "prettier": "prettier --write '**/*.{ts,json}'"
   },
   "dependencies": {
     "@fastify/jwt": "^5.0.1",
