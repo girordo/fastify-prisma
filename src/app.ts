@@ -1,60 +1,60 @@
-import Fastify, { FastifyReply, FastifyRequest } from "fastify";
-import fjwt from "@fastify/jwt";
-import userRoutes from "./modules/user/user.route";
-import productRoutes from "./modules/product/product.route";
-import { userSchemas } from "./modules/user/user.schema";
-import { productSchemas } from "./modules/product/product.schema";
+import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
+import fjwt from '@fastify/jwt'
+import userRoutes from './modules/user/user.route'
+import productRoutes from './modules/product/product.route'
+import { userSchemas } from './modules/user/user.schema'
+import { productSchemas } from './modules/product/product.schema'
 
-export const server = Fastify();
+export const server = Fastify()
 
-declare module "fastify" {
+declare module 'fastify' {
   export interface FastifyInstance {
-    authenticate: any;
+    authenticate: any
   }
 }
 
-declare module "fastify" {
+declare module 'fastify' {
   interface FastifyJWT {
     user: {
-      id: number;
-      email: string;
-      name: string;
-    };
+      id: number
+      email: string
+      name: string
+    }
   }
 }
 
-server.register(fjwt, { secret: "asdfhjshahaskda" });
+server.register(fjwt, { secret: 'asdfhjshahaskda' })
 
 server.decorate(
-  "authenticate",
+  'authenticate',
   async (request: FastifyRequest, reply: FastifyReply) => {
     try {
-      await request.jwtVerify();
+      await request.jwtVerify()
     } catch (e) {
-      return reply.send(e);
+      return reply.send(e)
     }
   }
-);
+)
 
-server.get("/healthcheck", async function (request, response) {
-  return { status: "ok" };
-});
+server.get('/healthcheck', async function (request, response) {
+  return { status: 'ok' }
+})
 
 async function main() {
   for (const schema of [...userSchemas, ...productSchemas]) {
-    server.addSchema(schema);
+    server.addSchema(schema)
   }
 
-  server.register(userRoutes, { prefix: "api/users" });
-  server.register(productRoutes, { prefix: "api/products" });
+  server.register(userRoutes, { prefix: 'api/users' })
+  server.register(productRoutes, { prefix: 'api/products' })
 
   try {
-    await server.listen(3000, "0.0.0.0");
-    console.log(`Server ready at http://localhost:3000`);
+    await server.listen(3000, '0.0.0.0')
+    console.log('Server ready at http://localhost:3000')
   } catch (e) {
-    server.log.error(e);
-    process.exit(1);
+    server.log.error(e)
+    process.exit(1)
   }
 }
 
-main();
+main()
